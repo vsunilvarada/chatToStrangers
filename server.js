@@ -1,7 +1,7 @@
 // server.js
 
 const express = require('express');
-const serverless = require('serverless');
+const serverless = require('serverless-http');
 const app = express();
 const http = require('http').createServer(app);
 const io = require('socket.io')(http);
@@ -28,7 +28,8 @@ io.on('connection', (socket) => {
   });
 });
 
-
+module.exports = app;
+module.exports.handler = serverless(app)
 
 
 // Start the server
